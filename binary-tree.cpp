@@ -2,91 +2,81 @@
 using namespace std;
 
 
-struct node
+struct bst_node
 {
 	int data;
-	struct node *left;
-	struct node *right;
+	struct bst_node *left;
+	struct bst_node *right;
 }*root;
 
 
 class binarysearchtree
 {
 	public:
-		void create_node(int);
-		void insert_node(struct node *);
+		void insert(int);
 		void traversal();
-		void print(struct node*);
+		void print(struct bst_node *);
 
 		binarysearchtree()
 		{
 			root = NULL;
 		}
-
+		bst_node* insert_node(bst_node *, int);
 };
 
 int main()
 {
 	binarysearchtree bst;
-	bst.create_node(4);
-	//bst.create_node(2);
-	// bst.create_node(6);
-	// bst.create_node(1);
-	// bst.create_node(3);
-	// bst.create_node(5);
-	// bst.create_node(8);
+	bst.insert_node(root,4);
+	bst.insert_node(root, 2);
+	bst.insert_node(root, 6);
+	// bst.insert(1);
+	// bst.insert(3);
+	// bst.insert(5);
+	// bst.insert(8);
 	bst.traversal();
+	
+	
 }
 
-void binarysearchtree :: create_node(int val)
+void binarysearchtree :: insert(int val)
 {
-	struct node *temp;
-	temp = new(struct node);
-	if(temp == NULL)
+
+	insert_node(root, val);
+}
+
+bst_node * insert_node( bst_node *node, int val)
+{
+	if(node == NULL)
 	{
-		cout<<"Memory not allocated"<<endl;
-		return ;
-	}
-	else
+		node = new (struct bst_node);
+		node->data = val;
+		node->left = NULL;
+		node->right = NULL;
+		return node;
+	} 
+
+	else 
 	{	
-		temp->data = val;
-		temp->left = NULL;
-		temp->right = NULL;
+		if(val < node->data)
+		{
+			node->left = insert_node(node->left, val);
+		}
 
-		//return temp;
-	}
-	insert_node(temp);
-}
-
-
-void binarysearchtree :: insert_node(struct node *temp)
-{
-	struct node *temp_node;
-	//temp = create_node(val);
-	//temp_node = root;
-	if(root == NULL)
-	{
-		root = temp;
-		//root->left = NULL;
-		//root->right = NULL;
-	}
-
-	else
-	{
-		if(temp->data < root->data)
-			insert_node(root->left);
-		else
-			insert_node(root->right);
+		else if(val > node->data)
+		{
+			node->right = insert_node(node->right, val);
+		}
+		return node;
 	}
 }
-
 
 void binarysearchtree :: traversal()
 {
 	print(root);
 }
 
-void binarysearchtree :: print(struct node *temp)
+void binarysearchtree :: print(struct bst_node *temp)
 {
 	if(temp != NULL)
 	{
