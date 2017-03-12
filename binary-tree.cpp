@@ -28,82 +28,47 @@ int main()
 {
 	binarysearchtree bst;
 	bst.insert_node(root,4);
-	//cout<<"root ="<<root->data<<endl;
 	bst.insert_node(root, 2);
 	bst.insert_node(root, 6);
 	bst.insert_node(root, 1);
 	bst.insert_node(root, 3);
 	bst.insert_node(root, 5);
 	bst.insert_node(root, 8);
-	bst.traversal();
-
 	
+	bst.traversal();
 	
 }
 
 void binarysearchtree :: insert(int val)
 {
-
 	insert_node(root, val);
 }
 
-void binarysearchtree :: insert_node( bst_node *& temp, int val)
+void binarysearchtree :: insert_node( bst_node *& node, int val)
 {
-
-	//cout<<"root val = "<< root->data<<endl;
-	if(temp == NULL)
+	if(node == NULL)
 	{
-		temp = new (struct bst_node);
-		temp->data = val;
-		temp->left = NULL;
-		temp->right = NULL;
-		cout<<"data inserted =" << temp << " - " <<temp->data<<endl;
-		//return temp;
+		node = new (struct bst_node);
+		node->data = val;
+		node->left = NULL;
+		node->right = NULL;
+		cout<<"data inserted =" << node << " - " <<node->data<<endl;
 		
 	} 
 
 	else 
 	{	
-		if(val < temp->data)
+		if(val < node->data)
 		{
 			cout<<"\nless val"<<endl;
-			 insert_node(temp->left, val);
-
-			// if (temp->left != NULL)
-   //      	{
-   //     		     insert_node(temp->left, val);	
-	  // 		 }
-	  //   	else
-	  //   	{
-	  //               temp->left->data = val;
-	  //               (temp->left)->left = NULL;
-	  //               (temp->left)->right = NULL;
-	  //               cout<<"Node Added To Left"<<endl;
-	  //               return temp;
-	  //        }
-        	
+			insert_node(node->left, val);
 		}
 
-		else if(val > temp->data)
+		else if(val > node->data)
 		{
 			cout<<"\nbig val"<<endl;
-			insert_node(temp->right, val);
-
-
-			// if (temp->right != NULL)
-	  //       {
-	  //           insert_node(temp->right, val);
-	  //       }
-	  //       else
-	  //       {
-	  //           temp->right->data = val;
-	  //           (temp->right)->left = NULL;
-	  //           (temp->right)->right = NULL;
-	  //           cout<<"Node Added To Right"<<endl;
-	  //           return temp;
-	  //       }	
+			insert_node(node->right, val);
 		}
-		//return temp;
 	}
 }
 
