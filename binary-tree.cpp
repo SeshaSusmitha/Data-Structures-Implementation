@@ -16,6 +16,7 @@ class binarysearchtree
 		void insert(int);
 		void traversal();
 		void print(struct bst_node *&);
+		void inorder(struct bst_node *& temp);
 
 		binarysearchtree()
 		{
@@ -27,7 +28,7 @@ class binarysearchtree
 int main()
 {
 	binarysearchtree bst;
-	bst.insert_node(root,4);
+	bst.insert_node(root, 4);
 	bst.insert_node(root, 2);
 	bst.insert_node(root, 6);
 	bst.insert_node(root, 1);
@@ -35,7 +36,7 @@ int main()
 	bst.insert_node(root, 5);
 	bst.insert_node(root, 8);
 	
-	bst.traversal();
+	bst.inorder(root);
 	
 }
 
@@ -52,7 +53,7 @@ void binarysearchtree :: insert_node( bst_node *& node, int val)
 		node->data = val;
 		node->left = NULL;
 		node->right = NULL;
-		cout<<"data inserted =" << node << " - " <<node->data<<endl;
+		//cout<<"data inserted =" << node << " - " <<node->data<<endl;
 		
 	} 
 
@@ -60,13 +61,12 @@ void binarysearchtree :: insert_node( bst_node *& node, int val)
 	{	
 		if(val < node->data)
 		{
-			cout<<"\nless val"<<endl;
+			//cout << val << " is less than " << node->data << endl;
 			insert_node(node->left, val);
 		}
-
-		else if(val > node->data)
+		else
 		{
-			cout<<"\nbig val"<<endl;
+			//cout << val << " is greater than " << node->data << endl;
 			insert_node(node->right, val);
 		}
 	}
@@ -77,12 +77,31 @@ void binarysearchtree :: traversal()
 	print(root);
 }
 
+void binarysearchtree :: inorder(struct bst_node *& temp)
+{
+	if(temp != NULL)
+	{
+		inorder(temp->left);
+
+		cout << temp->data << " " <<endl;
+		
+		inorder(temp->right);
+	}
+	else
+	{
+		// cout<<"\nno ele to display"<<endl;
+		return;
+	}
+}
+
 void binarysearchtree :: print(struct bst_node *& temp)
 {
+	cout<<"Elements in the BST: ";
 	if(temp != NULL)
 	{
 		cout << temp->data << " " <<endl;
 		print(temp->left);
+		cout << temp->data << " " <<endl;
 		
 	}
 	else
