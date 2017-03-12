@@ -5,8 +5,8 @@ using namespace std;
 struct bst_node
 {
 	int data;
-	struct bst_node *left;
-	struct bst_node *right;
+	bst_node *left;
+	bst_node *right;
 }*root;
 
 
@@ -15,26 +15,28 @@ class binarysearchtree
 	public:
 		void insert(int);
 		void traversal();
-		void print(struct bst_node *);
+		void print(struct bst_node *&);
 
 		binarysearchtree()
 		{
 			root = NULL;
 		}
-		bst_node* insert_node(bst_node *, int);
+		void insert_node(bst_node *&, int);
 };
 
 int main()
 {
 	binarysearchtree bst;
 	bst.insert_node(root,4);
+	//cout<<"root ="<<root->data<<endl;
 	bst.insert_node(root, 2);
 	bst.insert_node(root, 6);
-	// bst.insert(1);
-	// bst.insert(3);
-	// bst.insert(5);
-	// bst.insert(8);
+	bst.insert_node(root, 1);
+	bst.insert_node(root, 3);
+	bst.insert_node(root, 5);
+	bst.insert_node(root, 8);
 	bst.traversal();
+
 	
 	
 }
@@ -45,29 +47,63 @@ void binarysearchtree :: insert(int val)
 	insert_node(root, val);
 }
 
-bst_node * insert_node( bst_node *node, int val)
+void binarysearchtree :: insert_node( bst_node *& temp, int val)
 {
-	if(node == NULL)
+
+	//cout<<"root val = "<< root->data<<endl;
+	if(temp == NULL)
 	{
-		node = new (struct bst_node);
-		node->data = val;
-		node->left = NULL;
-		node->right = NULL;
-		return node;
+		temp = new (struct bst_node);
+		temp->data = val;
+		temp->left = NULL;
+		temp->right = NULL;
+		cout<<"data inserted =" << temp << " - " <<temp->data<<endl;
+		//return temp;
+		
 	} 
 
 	else 
 	{	
-		if(val < node->data)
+		if(val < temp->data)
 		{
-			node->left = insert_node(node->left, val);
+			cout<<"\nless val"<<endl;
+			 insert_node(temp->left, val);
+
+			// if (temp->left != NULL)
+   //      	{
+   //     		     insert_node(temp->left, val);	
+	  // 		 }
+	  //   	else
+	  //   	{
+	  //               temp->left->data = val;
+	  //               (temp->left)->left = NULL;
+	  //               (temp->left)->right = NULL;
+	  //               cout<<"Node Added To Left"<<endl;
+	  //               return temp;
+	  //        }
+        	
 		}
 
-		else if(val > node->data)
+		else if(val > temp->data)
 		{
-			node->right = insert_node(node->right, val);
+			cout<<"\nbig val"<<endl;
+			insert_node(temp->right, val);
+
+
+			// if (temp->right != NULL)
+	  //       {
+	  //           insert_node(temp->right, val);
+	  //       }
+	  //       else
+	  //       {
+	  //           temp->right->data = val;
+	  //           (temp->right)->left = NULL;
+	  //           (temp->right)->right = NULL;
+	  //           cout<<"Node Added To Right"<<endl;
+	  //           return temp;
+	  //       }	
 		}
-		return node;
+		//return temp;
 	}
 }
 
@@ -76,17 +112,17 @@ void binarysearchtree :: traversal()
 	print(root);
 }
 
-void binarysearchtree :: print(struct bst_node *temp)
+void binarysearchtree :: print(struct bst_node *& temp)
 {
 	if(temp != NULL)
 	{
+		cout << temp->data << " " <<endl;
 		print(temp->left);
-		cout<<temp->data<<endl;
-		cout<<temp->right;
+		
 	}
 	else
 	{
-		cout<<"no ele to display"<<endl;
+		cout<<"\nno ele to display"<<endl;
 		return;
 	}
 }

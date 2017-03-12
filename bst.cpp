@@ -167,16 +167,16 @@ void BST::insert(node *tree, node *newnode)
         if (tree->left != NULL)
         {
             insert(tree->left, newnode);	
-	}
-	else
-	{
-            tree->left = newnode;
-            (tree->left)->left = NULL;
-            (tree->left)->right = NULL;
-            cout<<"Node Added To Left"<<endl;
-            return;
+	   }
+    	else
+    	{
+                tree->left = newnode;
+                (tree->left)->left = NULL;
+                (tree->left)->right = NULL;
+                cout<<"Node Added To Left"<<endl;
+                return;
+            }
         }
-    }
     else
     {
         if (tree->right != NULL)
