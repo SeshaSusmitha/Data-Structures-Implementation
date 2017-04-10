@@ -22,9 +22,7 @@ class single_llist
 		void delete_val(int); //Deletes element if available from the linked list
 		void search(int); //Searches the list for the given element
 		void display(); //Displays all elements or a message if the list is empty
-		//cout<<"Linked list elements in reverse order: "<<endl;
-		void displaymessage();
-		void reverse_print(struct node *head); // Displays the linked list elements in reverse order
+		//struct node* reverse(struct node*); // Reverses elements of linked list iteratively
 
 		single_llist()
 		{
@@ -37,19 +35,23 @@ int main()
 {
 	single_llist sl;
 	sl.display();
+	//sl.reverse(head);
 	sl.delete_val(2);
 	sl.insert_begin(2);
 	sl.insert_begin(4);
+	sl.insert_begin(6);
+	sl.insert_begin(8);
+	//sl.display();
 	sl.insert_end(6);
 	sl.insert_end(8);
 	sl.display();
-	sl.displaymessage();
-	sl.reverse_print(head);
-	// sl.search(6);
-	// sl.search(10);
-	// sl.delete_val(1);
-	// sl.delete_val(6);
-	// sl.display();
+	cout<<"head: "<<head->data<<endl;
+	sl.display();
+	sl.search(6);
+	sl.search(10);
+	sl.delete_val(1);
+	sl.delete_val(6);
+	sl.display();
 }
 
 
@@ -118,59 +120,53 @@ void single_llist :: insert_end(int val)
 	cout<<"inserted ele "<<val<<endl;
 }
 
-// void single_llist :: delete_val(int val)
-// {
-// 	struct node *s,*temp;
-// 	s= head;
-// 	int pos;
-// 	while(s != NULL)
-// 	{
-// 		//pos++;
-// 		if(s->next->data == val)
-// 		{
-// 			temp = s->next;
-// 			s->next = temp->next;
-// 			//free(temp);
-// 			break;
-// 		}
-// 		s= s->next;
-
-// 	}
-// }
 
 /* Deletes the given element from the linked list */
 
 void single_llist :: delete_val(int val)
 
 {
-	struct node *temp, *temp1;
-	temp = head;
-	cout<<"\nval to be deleted is "<<val<<endl;
-	//cout<<"head value is "<<temp->data<<endl;
-	if(temp == NULL)
+	struct node *current, *temp;
+	current = head;
+	if(current == NULL)
 	{
 		cout<<"\nList is empty\n";
 		return;
 	}
 
-	else
+	else if(current->data == val)
 	{
-		while(temp->next != NULL)
-		{
-			if(temp->next ->data == val)
-			{
-				
-				temp1 = temp->next;
-				temp->next = temp1->next;
-				free(temp1); //Frees the deleted value from memory
-				return;
-			}
-			else
-			{
-				temp = temp->next;
-			}
+		if(current->next == NULL)
+			current = NULL;
+		else
+		{	
+			temp = current->next;
+			current = NULL;
+			head = temp;
 		}
-		cout<<"\nval to be deleted is not available in the list"<<endl;
+
+	}
+	else
+	{	
+
+		{
+			while(current->next != NULL)
+			{
+				if(current->next ->data == val)
+				{
+					
+					temp = current->next;
+					current->next = temp->next;
+					free(temp); //Frees the deleted value from memory
+					return;
+				}
+				else
+				{
+					current = current->next;
+				}
+			}
+			cout<<"\nval to be deleted is not available in the list"<<endl;
+		}
 	}
 }
 
@@ -180,7 +176,6 @@ void single_llist :: display()
 {
 	struct node *temp;
 	temp = head;
-	//cout<<"temp data "<<temp->data<<endl;
 	if(head == NULL)
 	{
 		cout<<"\nList is empty\n";
@@ -193,7 +188,6 @@ void single_llist :: display()
 		cout<<"\n";
 		temp = temp ->next;
 	}
-	cout<<endl;
 }
 
 void single_llist ::search(int val)
@@ -216,27 +210,7 @@ void single_llist ::search(int val)
 	cout<<"\nElement to be searched not available in the list"<<endl;
 }
 
-void single_llist :: displaymessage()
-{
-	cout<<"List of elements in reverse order are: "<<endl;
-}
 
-void single_llist :: reverse_print(struct node *head)
-{
-	struct node *temp;
-	temp = head;
-
-	/* Base case for recursion */
-	if(temp == NULL)
-		return;
-	
-	/* Recursive call to print element of next node */
-	reverse_print(temp->next);
-
-	/* Print the element of the node */
-	cout<<temp->data<<endl;
-	
-}
 
 
 

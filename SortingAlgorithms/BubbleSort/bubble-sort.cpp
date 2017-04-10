@@ -15,6 +15,12 @@ int main()
 	nums.push_back(5);
 	nums.push_back(3);
 	int length = nums.size();
+	cout<<"Array before bubble sort: "<<endl;
+	for(int i = 0; i < length; i++)
+		{
+			cout<<nums[i]<<" ";
+		}
+		cout<<endl;
 	bubble_sort(nums,length);	
 
 }
@@ -39,6 +45,7 @@ void bubble_sort(vector<int>nums, int length)
 		if(flag == 0)
 				break;
 	}
+	cout<<"Array after bubble sort: "<<endl;
 	for(int i = 0; i < length; i++)
 		{
 			cout<<nums[i]<<" ";
