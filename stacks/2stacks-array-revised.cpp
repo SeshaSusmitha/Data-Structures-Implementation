@@ -76,6 +76,38 @@ class twoStack
 				return ele;
 			}
 		}
+		void printStack1() /* Method to print elements of stack1 */
+		{
+			if(top1 == -1) /* Returns an error if stack is empty */
+			{
+				cout<<"Stack1 underflow...No elements to display"<<endl;
+				return ;
+			}
+			else
+			{	
+				for(int i = top1; i >=0 ; i--)
+				{
+					cout<<A[i]<<" ";
+				}
+				cout<<endl;
+			}
+		}
+		void printStack2() /* Method to print elements of stack2 */
+		{
+			if(top2 == max_size) /* Returns an error if stack is empty */
+			{
+				cout<<"Stack2 underflow....No elements to display"<<endl;
+				return ;
+			}
+			else
+			{	
+				for(int i = top2; i < max_size ; i++)
+				{
+					cout<<A[i]<<" ";
+				}
+				cout<<endl;
+			}
+		}
 };
 
 
@@ -83,12 +115,18 @@ class twoStack
 int main()
 {
 	twoStack ts;
+	ts.printStack1();
+	ts.printStack2();
 	ts.push1(1);
 	ts.push2(2);
 	ts.push1(3);
 	ts.push2(4);
 	ts.push1(5);
 	ts.push2(6);
+	cout<<"Elements of stack 1 : "<<endl;
+	ts.printStack1();
+	cout<<"Elements of stack 2 : "<<endl;
+	ts.printStack2();
 	cout<<ts.pop1()<<endl;
 	cout<<ts.pop2()<<endl;
 }
